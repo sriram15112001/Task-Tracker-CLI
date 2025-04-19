@@ -22,6 +22,23 @@ public class TaskTrackerApplication {
             case "mark-done":
                 createUpdateTasks.updateStatus(Integer.parseInt(args[1]), Status.DONE);
                 break;
+            case "list":
+                if(args.length == 1) {
+                    createUpdateTasks.listTasks(null);
+                } else {
+                    switch (args[1]){
+                        case "done":
+                            createUpdateTasks.listTasks(Status.DONE);
+                            break;
+                        case "todo":
+                            createUpdateTasks.listTasks(Status.TODO);
+                            break;
+                        case "in-progress":
+                            createUpdateTasks.listTasks(Status.IN_PROGRESS);
+                            break;
+                    }
+                }
+
         }
     }
 }
