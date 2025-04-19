@@ -2,8 +2,8 @@ package TaskTracker;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,7 +12,10 @@ public class WriteTask {
     public boolean writeTask(List<Task> taskList) {
         try(PrintWriter printWriter = new PrintWriter("tasks.txt")) {
             taskList.forEach(task -> {
-                printWriter.println(task.getTaskId() + "-_" + task.getTaskName());
+                printWriter.println(
+                        task.getTaskId() + "-_" + task.getTaskName() + "-_" +
+                                task.getStatus() + "-_" + task.getCreatedAt() + "-_" + task.getUpdatedAt()
+                        );
             });
             return true;
         } catch (Exception e) {
@@ -26,7 +29,10 @@ public class WriteTask {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] words = line.split("-_");
-                tasks.add(new Task(Integer.parseInt(words[0]), words[1]));
+                tasks.add(
+                        new Task(Integer.parseInt(words[0]), words[1], words[2],
+                                LocalDateTime.parse(words[3]), LocalDateTime.parse(words[4]))
+                );
             }
         } catch (Exception e) {
             return null;
