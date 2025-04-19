@@ -53,4 +53,15 @@ public class CreateUpdateTasks {
         return statusUpdate;
     }
 
+    public void listTasks(Status status) {
+        List<Task> currentTasks = writeTask.readTasks();
+        if(status == null){
+            currentTasks.forEach(System.out::println);
+        } else {
+            currentTasks.stream()
+                    .filter(task -> task.getStatus().equals(status.getStatus()))
+                    .forEach(System.out::println);
+        }
+    }
+
 }
